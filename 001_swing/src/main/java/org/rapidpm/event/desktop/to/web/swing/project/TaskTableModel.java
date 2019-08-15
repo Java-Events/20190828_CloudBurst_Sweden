@@ -32,7 +32,7 @@ public class TaskTableModel
 
   private String activeProject = "closed";
 
-  public String getActiveProject(){
+  public String getActiveProject() {
     return activeProject;
   }
 
@@ -64,7 +64,7 @@ public class TaskTableModel
     return tasks.get(rowIndex);
   }
 
-  public void persistTask(Task task){
+  public void persistTask(Task task) {
     repository.store(task);
     refreshData();
   }
@@ -76,7 +76,7 @@ public class TaskTableModel
     fireTableDataChanged();
   }
 
-  public void removeTask(Task task){
+  public void removeTask(Task task) {
     repository.remove(task);
     refreshData();
   }

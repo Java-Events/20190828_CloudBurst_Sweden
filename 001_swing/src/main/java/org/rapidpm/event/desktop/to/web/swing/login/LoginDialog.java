@@ -14,12 +14,10 @@ public class LoginDialog
     extends JDialog
     implements HasLogger {
 
-  private JTextField     tfUsername = new JTextField();
-  private JPasswordField pfPassword = new JPasswordField();
-  private JButton        btnLogin   = new JButton();
-  private JButton        btnCancel  = new JButton();
-  private boolean        succeeded;
-
+  public static final String ID_USERNAME   = "username";
+  public static final String ID_PASSWORD   = "password";
+  public static final String ID_BTN_LOGIN  = "btnLogin";
+  public static final String ID_BTN_CANCEL = "btnCancel";
   private final LoginService loginService = new LoginServiceProvider().load()
                                                                       .ifAbsent(() -> logger().warning(
                                                                           "LoginService not available"))
@@ -27,8 +25,19 @@ public class LoginDialog
                                                                         throw new RuntimeException();
                                                                       })
                                                                       .get();
+  private JTextField     tfUsername = new JTextField();
+  private JPasswordField pfPassword = new JPasswordField();
+  private JButton        btnLogin   = new JButton();
+  private JButton        btnCancel  = new JButton();
+  private boolean        succeeded;
+
   public LoginDialog(Frame parent) {
     super(parent, "Login", true);
+
+    tfUsername.setName(ID_USERNAME);
+    pfPassword.setName(ID_PASSWORD);
+    btnLogin.setName(ID_BTN_LOGIN);
+    btnCancel.setName(ID_BTN_CANCEL);
     //
     setLayout(new MigLayout("", "[grow]", "[grow]"));
     add(new JLabel("Username:"), "right");
@@ -43,12 +52,12 @@ public class LoginDialog
     btnLogin.setText("Login");
     btnLogin.addActionListener(e -> {
       if (loginService.authenticate(getUsername(), getPassword())) {
-        showMessageDialog(LoginDialog.this, "Hi " + getUsername() + "! You have successfully logged in.", "Login",
+        showMessageDialog(LoginDialog.this, "Hi " + getUsername() + "! You have successfully logged in.", "Login OK",
                           INFORMATION_MESSAGE);
         succeeded = true;
         dispose();
       } else {
-        showMessageDialog(LoginDialog.this, "Invalid username or password", "Login", ERROR_MESSAGE);
+        showMessageDialog(LoginDialog.this, "Invalid username or password", "Login not allowed", ERROR_MESSAGE);
         // reset username and password
         tfUsername.setText("");
         pfPassword.setText("");

@@ -10,10 +10,6 @@ import static java.util.concurrent.ConcurrentHashMap.newKeySet;
 public class EventBus<T>
     implements HasLogger {
 
-  public interface Registration {
-    void remove();
-  }
-
   private Set<Consumer<T>> listeners = newKeySet();
 
   public Registration register(Consumer<T> listener) {
@@ -24,6 +20,10 @@ public class EventBus<T>
   public void fireMessageEvent(T event) {
     logger().info("fireMessageEvent - " + event);
     listeners.forEach(c -> c.accept(event));
+  }
+
+  public interface Registration {
+    void remove();
   }
 
 }

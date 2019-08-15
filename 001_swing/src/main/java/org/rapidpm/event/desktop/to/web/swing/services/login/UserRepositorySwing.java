@@ -10,7 +10,25 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserRepositorySwing
     implements UserRepository, HasLogger {
 
-  private static final Map<Key, User> repository = new ConcurrentHashMap<>();
+  private static final Map<Key, User> REPOSITORY = new ConcurrentHashMap<>();
+
+  @Override
+  public Optional<User> loadUser(String username, String password) {
+    final Key key = new Key(username, password);
+    return (REPOSITORY.containsKey(key))
+           ? Optional.of(REPOSITORY.get(key))
+           : Optional.empty();
+  }
+
+  @Override
+  public void storeUser(User user) {
+    REPOSITORY.put(new Key(user.getUsername(), user.getPassword()), user);
+  }
+
+  @Override
+  public void deleteUser(User user) {
+    REPOSITORY.remove(new Key(user.getUsername(), user.getPassword()));
+  }
 
   public static class Key {
     private String username;
@@ -33,23 +51,5 @@ public class UserRepositorySwing
     public int hashCode() {
       return Objects.hash(username, password);
     }
-  }
-
-  @Override
-  public Optional<User> loadUser(String username, String password) {
-    final Key key = new Key(username, password);
-    return (repository.containsKey(key))
-           ? Optional.of(repository.get(key))
-           : Optional.empty();
-  }
-
-  @Override
-  public void storeUser(User user) {
-    repository.put(new Key(user.getUsername(), user.getPassword()), user);
-  }
-
-  @Override
-  public void deleteUser(User user) {
-    repository.remove(new Key(user.getUsername(), user.getPassword()));
   }
 }

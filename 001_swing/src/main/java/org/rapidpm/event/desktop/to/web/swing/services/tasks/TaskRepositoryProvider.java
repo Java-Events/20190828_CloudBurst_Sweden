@@ -8,7 +8,6 @@ public class TaskRepositoryProvider
 
   @Override
   public Result<TaskRepository> load() {
-    return ServiceProvider.<TaskRepository>loadService()
-        .apply(TaskRepository.class);
+    return ServiceProvider.<TaskRepository>loadService().apply(TaskRepository.class);
   }
 }

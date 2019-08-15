@@ -20,6 +20,10 @@ public class SwingMainFrame
   private final JTabbedPane        workingArea    = new JTabbedPane();
 
 
+  public SwingMainFrame(String title) throws HeadlessException {
+    super(title);
+  }
+
   public void initUI() {
     setJMenuBar(mainMenu);
     setContentPane(workingArea());
@@ -45,11 +49,6 @@ public class SwingMainFrame
 
 
     return workingArea;
-  }
-
-
-  public SwingMainFrame(String title) throws HeadlessException {
-    super(title);
   }
 
   public void addComponent(Component c, String name) {

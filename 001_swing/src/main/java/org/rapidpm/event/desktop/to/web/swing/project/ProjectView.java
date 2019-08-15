@@ -16,24 +16,35 @@ public class ProjectView
     extends JPanel
     implements HasLogger {
 
+  private final TaskTableModel       tableModel    = new TaskTableModel();
+  private final JTable               table         = new JTable(tableModel);
+  private final JScrollPane          scrollPane    = new JScrollPane(table);
+  private final JTextField           taskNumber    = new JTextField();
+  private final JTextField           projectNumber = new JTextField();
+  private final JTextField           summary       = new JTextField();
+  private final JTextArea            description   = new JTextArea();
+  private final JComboBox<TaskState> state         = new JComboBox<>(TaskState.values());
+  private final JButton buttonNew    = createButton("New");
+  private final JButton buttonDelete = createButton("Delete");
+  private final JButton buttonEdit   = createButton("Edit");
+  private final JButton buttonSave   = createButton("Save");
+  private final JButton buttonCancel = createButton("Cancel");
+
   public ProjectView(LayoutManager layout, boolean isDoubleBuffered) {
     super(layout, isDoubleBuffered);
     setOpaque(true);
     initUI();
   }
-
   public ProjectView(LayoutManager layout) {
     super(layout);
     setOpaque(true);
     initUI();
   }
-
   public ProjectView(boolean isDoubleBuffered) {
     super(isDoubleBuffered);
     setOpaque(true);
     initUI();
   }
-
   public ProjectView() {
     super();
     setOpaque(true);
@@ -52,21 +63,6 @@ public class ProjectView
       clearSwing();
     });
   }
-
-  private final TaskTableModel       tableModel    = new TaskTableModel();
-  private final JTable               table         = new JTable(tableModel);
-  private final JScrollPane          scrollPane    = new JScrollPane(table);
-  private final JTextField           taskNumber    = new JTextField();
-  private final JTextField           projectNumber = new JTextField();
-  private final JTextField           summary       = new JTextField();
-  private final JTextArea            description   = new JTextArea();
-  private final JComboBox<TaskState> state         = new JComboBox<>(TaskState.values());
-
-  private final JButton buttonNew    = createButton("New");
-  private final JButton buttonDelete = createButton("Delete");
-  private final JButton buttonEdit   = createButton("Edit");
-  private final JButton buttonSave   = createButton("Save");
-  private final JButton buttonCancel = createButton("Cancel");
 
   private void initUI() {
     registerForProjectEvents();

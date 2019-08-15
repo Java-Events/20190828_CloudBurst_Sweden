@@ -8,8 +8,6 @@ import org.rapidpm.event.desktop.to.web.swing.services.tasks.TaskRepositoryProvi
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,22 +66,14 @@ public class MainMenuBar
       final Object selectedProject = JOptionPane.showInputDialog(SwingMain.instance(), "Please Select a project",
                                                                  "Project Selector", JOptionPane.INFORMATION_MESSAGE,
                                                                  null, projects.toArray(), projects.get(0));
-      eventbusFor(EventType.PROJECT_SELECTED)
-               .fireMessageEvent(selectedProject);
+      eventbusFor(EventType.PROJECT_SELECTED).fireMessageEvent(selectedProject);
     });
 
     JMenuItem reloadProject = new JMenuItem("Reload Project");
-    reloadProject.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        eventbusFor(EventType.PROJECT_RELOADED)
-            .fireMessageEvent("reload");
-      }
-    });
+    reloadProject.addActionListener(e -> eventbusFor(EventType.PROJECT_RELOADED).fireMessageEvent("reload"));
     JMenuItem closeProject = new JMenuItem("Close Project");
     closeProject.addActionListener(e -> {
-      eventbusFor(EventType.PROJECT_CLOSED)
-          .fireMessageEvent("close");
+      eventbusFor(EventType.PROJECT_CLOSED).fireMessageEvent("close");
     });
 
     JMenu tasksMenu = new JMenu("Projects");

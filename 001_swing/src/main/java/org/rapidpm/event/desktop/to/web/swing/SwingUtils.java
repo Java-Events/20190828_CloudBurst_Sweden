@@ -35,10 +35,7 @@ public class SwingUtils {
     return b;
   }
 
-
-
-
-  public static MigLayout defaultLayoutManager(){
+  public static MigLayout defaultLayoutManager() {
     return new MigLayout("", "[]15[][grow,fill]15[][grow,fill]");
   }
 

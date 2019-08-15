@@ -14,22 +14,21 @@ import static javax.swing.SwingUtilities.invokeLater;
 public class SwingMain
     implements HasLogger {
 
+  private static final Map<EventType, EventBus<?>> EVENT_BUS_MAP = new ConcurrentHashMap<>();
+  //Typical Swing static pattern - remove for web !!
+  private static SwingMainFrame                    frame;
+
   private SwingMain() {
   }
 
-  private static final Map<EventType, EventBus<?>> eventBusMap = new ConcurrentHashMap<>();
-
   public static <T> EventBus<T> eventbusFor(EventType eventType) {
-    return (EventBus<T>) eventBusMap.get(eventType);
+    return (EventBus<T>) EVENT_BUS_MAP.get(eventType);
   }
 
   private static void initEventBusMap() {
-    eventBusMap.clear();
-    stream(EventType.values()).forEach(et -> eventBusMap.put(et, new EventBus<>()));
+    EVENT_BUS_MAP.clear();
+    stream(EventType.values()).forEach(et -> EVENT_BUS_MAP.put(et, new EventBus<>()));
   }
-
-  //Typical Swing static pattern - remove for web !!
-  private static SwingMainFrame frame;
 
   public static SwingMainFrame instance() {
     return frame;
@@ -42,7 +41,7 @@ public class SwingMain
 
     invokeLater(() -> {
       final SwingMain swingMain = new SwingMain();
-//      swingMain.startLoginProcess();
+      swingMain.startLoginProcess();
       swingMain.initUI();
     });
   }
@@ -53,9 +52,10 @@ public class SwingMain
     frame.setLayout(new BorderLayout());
     frame.setSize(1024, 768);
     frame.setPreferredSize(new Dimension(1024, 768));
-    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+    Dimension dimension = Toolkit.getDefaultToolkit()
+                                 .getScreenSize();
+    int       x         = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+    int       y         = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
     frame.setLocation(x, y);
     frame.initUI();
     frame.pack();
