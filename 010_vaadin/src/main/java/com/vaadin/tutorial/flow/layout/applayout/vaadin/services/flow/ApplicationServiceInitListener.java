@@ -4,9 +4,9 @@ import static com.vaadin.tutorial.flow.layout.applayout.vaadin.views.login.Login
 import static java.lang.System.setProperty;
 
 import com.vaadin.tutorial.flow.layout.applayout.vaadin.services.I18NProviderImpl;
+import com.vaadin.tutorial.flow.layout.applayout.vaadin.services.User;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 import org.rapidpm.frp.model.Result;
-import com.vaadin.tutorial.flow.layout.applayout.vaadin.services.SecurityService;
 import com.vaadin.tutorial.flow.layout.applayout.vaadin.views.login.LoginView;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.router.BeforeEnterEvent;
@@ -37,7 +37,7 @@ public class ApplicationServiceInitListener implements VaadinServiceInitListener
       final VaadinSession vaadinSession = ui.getSession();
 
       Result.ofNullable(vaadinSession
-                            .getAttribute(SecurityService.User.class))
+                            .getAttribute(User.class))
             .ifPresentOrElse(u -> {
                                logger().info("User is logged in : " + u);
                              } ,

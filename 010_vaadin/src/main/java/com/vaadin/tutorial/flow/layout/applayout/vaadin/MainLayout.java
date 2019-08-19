@@ -16,7 +16,7 @@ import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import com.vaadin.tutorial.flow.layout.applayout.vaadin.services.SecurityService;
+import com.vaadin.tutorial.flow.layout.applayout.vaadin.services.User;
 import com.vaadin.tutorial.flow.layout.applayout.vaadin.views.dashboard.DashboardView;
 import com.vaadin.tutorial.flow.layout.applayout.vaadin.views.main.MainView;
 import com.vaadin.tutorial.flow.layout.applayout.vaadin.views.project.ProjectView;
@@ -69,7 +69,7 @@ public class MainLayout
     btn.addClickListener(e -> {
       UI            ui      = UI.getCurrent();
       VaadinSession session = ui.getSession();
-      session.setAttribute(SecurityService.User.class, null);
+      session.setAttribute(User.class, null);
       session.close();
       ui.navigate(MainView.class);
     });

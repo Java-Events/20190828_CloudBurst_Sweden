@@ -30,7 +30,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
-import com.vaadin.tutorial.flow.layout.applayout.vaadin.services.SecurityService;
+import com.vaadin.tutorial.flow.layout.applayout.vaadin.services.LoginService;
+import com.vaadin.tutorial.flow.layout.applayout.vaadin.services.User;
 import com.vaadin.tutorial.flow.layout.applayout.vaadin.views.main.MainView;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 
@@ -60,7 +61,7 @@ public class LoginView
 
   private final RadioButtonGroup<String> switchTheme = new RadioButtonGroup<>();
 
-  private final SecurityService securityService = new SecurityService();
+  private final LoginService loginService = new LoginService();
 
   public LoginView() {
 
@@ -106,17 +107,17 @@ public class LoginView
     });
 
     btnLogin.addClickListener(e -> {
-      securityService.checkLogin(username.getValue(), password.getValue())
-                     .ifPresentOrElse(u -> {
+      loginService.authenticate(username.getValue(), password.getValue())
+                  .ifPresentOrElse(u -> {
                        UI.getCurrent()
                          .getSession()
-                         .setAttribute(SecurityService.User.class, u);
+                         .setAttribute(User.class, u);
                        UI.getCurrent()
                          .navigate(MainView.class);
                      }, f -> {
                        UI.getCurrent()
                          .getSession()
-                         .setAttribute(SecurityService.User.class, null);
+                         .setAttribute(User.class, null);
                        logger().info(f);
                      });
     });
