@@ -8,9 +8,11 @@ import io.javalin.plugin.json.JavalinJson;
 import org.rapidpm.event.desktop.to.web.api.login.LoginService;
 import org.rapidpm.event.desktop.to.web.api.login.LoginServiceProvider;
 import org.rapidpm.event.desktop.to.web.api.login.SessionUser;
+import org.rapidpm.event.desktop.to.web.api.tasks.Task;
 import org.rapidpm.event.desktop.to.web.api.tasks.TaskRepository;
 import org.rapidpm.event.desktop.to.web.api.tasks.TaskRepositoryProvider;
 
+import java.util.Base64;
 import java.util.List;
 
 public class BackendService {
@@ -43,6 +45,8 @@ public class BackendService {
   public static final String PATH_LOAD_PROJECT  = "load-project";
   public static final String PATH_ELEMENT_COUNT = "element-count";
   public static final String PATH_TASK_FOR      = "task-for";
+  public static final String PATH_TASK_STORE    = "task-store";
+  public static final String PATH_TASK_DELETE    = "task-delete";
 
 
   public static void main(String[] args) {
@@ -94,11 +98,18 @@ public class BackendService {
       ctx.json(TASK_REPOSITORY.taskFor(Integer.valueOf(id), projectName));
     });
 
-//    app.get(PATH_TASK_STORE + "/:" + TASK, ctx -> {
-//      final String task = ctx.pathParam(TASK);
-//      final String id   = ctx.pathParam(TASK_ID);
-//      ctx.json(TASK_REPOSITORY.taskFor(Integer.valueOf(id), projectName));
-//    });
+    app.get(PATH_TASK_STORE + "/:" + TASK, ctx -> {
+      final String task = ctx.pathParam(TASK);
+      final Task   t = gson.fromJson(new String(Base64.getDecoder()
+                                                          .decode(task)), Task.class);
+      TASK_REPOSITORY.store(t);
+    });
+    app.get(PATH_TASK_DELETE + "/:" + TASK, ctx -> {
+      final String task = ctx.pathParam(TASK);
+      final Task t = gson.fromJson(new String(Base64.getDecoder()
+                                                    .decode(task)), Task.class);
+      TASK_REPOSITORY.remove(t);
+    });
 
 
   }

@@ -10,6 +10,7 @@ import okhttp3.Response;
 import org.rapidpm.dependencies.core.logger.HasLogger;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class TaskRepositoryClient
   public static final String PATH_LOAD_PROJECT  = "load-project";
   public static final String PATH_ELEMENT_COUNT = "element-count";
   public static final String PATH_TASK_FOR      = "task-for";
+  public static final String PATH_TASK_STORE    = "task-store";
+  public static final String PATH_TASK_DELETE    = "task-delete";
 
   public static final String PROJECT = "project";
   public static final String TASK_ID = "ID";
@@ -57,25 +60,40 @@ public class TaskRepositoryClient
 
   @Override
   public void store(Task task) {
-//    Request request = new Request.Builder().url(
-//        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_ + "/" + id + "/" + project)
-//                                           .build();
-//
-//    try (Response response = client.newCall(request)
-//                                   .execute()) {
-//      final String resultString = response.body()
-//                                          .string();
-//      final Task task = gson.fromJson(resultString, new TypeToken<Task>() { }.getType());
-//      return task;
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//    return null;
+    final String encoded = Base64.getEncoder()
+                           .encodeToString(gson.toJson(task)
+                                               .getBytes());
+
+    Request request = new Request.Builder().url(
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_TASK_STORE + "/" + encoded )
+                                           .build();
+
+    try (Response response = client.newCall(request)
+                                   .execute()) {
+      final String resultString = response.body()
+                                          .string();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void remove(Task task) {
+    final String encoded = Base64.getEncoder()
+                                 .encodeToString(gson.toJson(task)
+                                                     .getBytes());
 
+    Request request = new Request.Builder().url(
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_TASK_DELETE + "/" + encoded )
+                                           .build();
+
+    try (Response response = client.newCall(request)
+                                   .execute()) {
+      final String resultString = response.body()
+                                          .string();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
