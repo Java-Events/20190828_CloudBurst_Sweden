@@ -1,6 +1,26 @@
 # 20190828_CloudBurst_Sweden
 https://www.meetup.com/de-DE/Skane-Azure-User-Group/events/262222031/
 
+
+
+## Version 001 - Swing only
+
+
+
+## Version 002 - Vaadin only
+
+
+
+## Version 003 - Hybrid
+
+This project is split up into 3 parts. The first one is the Backend-Service. This is just a tiny REST Endpoint implemented with JavaLin. mvn clean package will create a fat jar inside the folder **target**.
+
+
+
+
+
+
+
 ## Mappingings
 
 Swing -> Vaadin
