@@ -8,11 +8,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.rapidpm.event.desktop.to.web.swing.login.LoginDialog;
 
 import javax.swing.*;
 
 //@ExtendWith(ServerExtension.class)
+@DisabledOnOs(OS.LINUX)
 public class LoginDialogTest {
 
   private DialogFixture fixture;
