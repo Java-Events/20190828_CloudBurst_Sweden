@@ -25,7 +25,7 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <finalName>swing-app</finalName>
+              <finalName>backend-app</finalName>
               <transformers>
                 <transformer
                     implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
