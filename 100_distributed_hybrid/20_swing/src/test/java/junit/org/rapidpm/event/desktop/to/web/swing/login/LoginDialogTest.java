@@ -7,24 +7,24 @@ public class LoginDialogTest {
 
 //  private DialogFixture fixture;
 
-  @BeforeAll
+//  @BeforeAll
   static void beforeAll() {
 //    FailOnThreadViolationRepaintManager.install();
   }
 
-  @BeforeEach
+//  @BeforeEach
   void setUp() {
 //    LoginDialog component = GuiActionRunner.execute(() -> new LoginDialog(new JFrame()));
 //    fixture = new DialogFixture(component);
 //    fixture.show();
   }
 
-  @AfterEach
+//  @AfterEach
   void tearDown() {
 //    fixture.cleanUp();
   }
 
-  @Test
+//  @Test
   @Disabled
   void testLogin001() {
 //    fixture.textBox(LoginDialog.ID_USERNAME)
