@@ -1,10 +1,10 @@
 package org.rapidpm.event.desktop.to.web.api.usermanagement;
 
 import org.rapidpm.dependencies.core.logger.HasLogger;
-import org.rapidpm.event.desktop.to.web.api.usermanagement.User;
-import org.rapidpm.event.desktop.to.web.api.usermanagement.UserRepository;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Collections.emptyList;

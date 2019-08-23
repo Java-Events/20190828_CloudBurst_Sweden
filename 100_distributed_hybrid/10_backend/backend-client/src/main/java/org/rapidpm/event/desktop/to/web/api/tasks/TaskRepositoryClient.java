@@ -26,7 +26,7 @@ public class TaskRepositoryClient
   public static final String PATH_ELEMENT_COUNT = "element-count";
   public static final String PATH_TASK_FOR      = "task-for";
   public static final String PATH_TASK_STORE    = "task-store";
-  public static final String PATH_TASK_DELETE    = "task-delete";
+  public static final String PATH_TASK_DELETE   = "task-delete";
 
   public static final String PROJECT = "project";
   public static final String TASK_ID = "ID";
@@ -43,7 +43,7 @@ public class TaskRepositoryClient
   @Override
   public Task taskFor(Integer id, String project) {
     Request request = new Request.Builder().url(
-        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_TASK_FOR + "/" + id + "/" + project)
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/" + PATH_TASK_FOR + "/" + id + "/" + project)
                                            .build();
 
     try (Response response = client.newCall(request)
@@ -61,11 +61,11 @@ public class TaskRepositoryClient
   @Override
   public void store(Task task) {
     final String encoded = Base64.getEncoder()
-                           .encodeToString(gson.toJson(task)
-                                               .getBytes());
+                                 .encodeToString(gson.toJson(task)
+                                                     .getBytes());
 
     Request request = new Request.Builder().url(
-        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_TASK_STORE + "/" + encoded )
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/" + PATH_TASK_STORE + "/" + encoded)
                                            .build();
 
     try (Response response = client.newCall(request)
@@ -84,7 +84,7 @@ public class TaskRepositoryClient
                                                      .getBytes());
 
     Request request = new Request.Builder().url(
-        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_TASK_DELETE + "/" + encoded )
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/" + PATH_TASK_DELETE + "/" + encoded)
                                            .build();
 
     try (Response response = client.newCall(request)
@@ -99,7 +99,7 @@ public class TaskRepositoryClient
   @Override
   public List<Task> loadProject(String project) {
     Request request = new Request.Builder().url(
-        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_LOAD_PROJECT + "/" + project)
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/" + PATH_LOAD_PROJECT + "/" + project)
                                            .build();
 
     try (Response response = client.newCall(request)
@@ -117,7 +117,7 @@ public class TaskRepositoryClient
   @Override
   public int elementCount() {
     Request request = new Request.Builder().url(
-        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_ELEMENT_COUNT )
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/" + PATH_ELEMENT_COUNT)
                                            .build();
 
     try (Response response = client.newCall(request)
@@ -135,7 +135,7 @@ public class TaskRepositoryClient
   @Override
   public List<String> projects() {
     Request request = new Request.Builder().url(
-        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_PROJECTS )
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/" + PATH_PROJECTS)
                                            .build();
 
     try (Response response = client.newCall(request)
@@ -153,7 +153,7 @@ public class TaskRepositoryClient
   @Override
   public int projectCount() {
     Request request = new Request.Builder().url(
-        "http://" + backendserviceIP + ":" + backendservicePORT + "/"+ PATH_PROJECT_COUNT )
+        "http://" + backendserviceIP + ":" + backendservicePORT + "/" + PATH_PROJECT_COUNT)
                                            .build();
 
     try (Response response = client.newCall(request)

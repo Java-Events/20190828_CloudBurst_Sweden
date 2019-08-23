@@ -5,7 +5,6 @@ import org.rapidpm.frp.model.Result;
 import java.util.Collections;
 import java.util.List;
 
-import static java.time.LocalDateTime.now;
 import static org.rapidpm.frp.matcher.Case.match;
 import static org.rapidpm.frp.matcher.Case.matchCase;
 import static org.rapidpm.frp.model.Result.failure;
