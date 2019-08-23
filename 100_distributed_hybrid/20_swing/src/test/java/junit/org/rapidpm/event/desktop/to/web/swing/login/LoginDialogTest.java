@@ -2,12 +2,9 @@ package junit.org.rapidpm.event.desktop.to.web.swing.login;
 
 import org.assertj.swing.core.matcher.DialogMatcher;
 import org.assertj.swing.core.matcher.JButtonMatcher;
-import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.DialogFixture;
 import org.junit.jupiter.api.*;
 import org.rapidpm.event.desktop.to.web.swing.login.LoginDialog;
-
-import javax.swing.*;
 
 //@ExtendWith(ServerExtension.class)
 public class LoginDialogTest {
