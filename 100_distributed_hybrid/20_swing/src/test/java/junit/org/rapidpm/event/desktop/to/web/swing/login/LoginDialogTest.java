@@ -21,14 +21,14 @@ public class LoginDialogTest {
 
   @BeforeEach
   void setUp() {
-    LoginDialog component = GuiActionRunner.execute(() -> new LoginDialog(new JFrame()));
-    fixture = new DialogFixture(component);
-    fixture.show();
+//    LoginDialog component = GuiActionRunner.execute(() -> new LoginDialog(new JFrame()));
+//    fixture = new DialogFixture(component);
+//    fixture.show();
   }
 
   @AfterEach
   void tearDown() {
-    fixture.cleanUp();
+//    fixture.cleanUp();
   }
 
   @Test
