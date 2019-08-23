@@ -1,7 +1,5 @@
 package junit.org.rapidpm.event.desktop.to.web.swing.login;
 
-import org.junit.jupiter.api.*;
-
 //@ExtendWith(ServerExtension.class)
 public class LoginDialogTest {
 
@@ -25,7 +23,7 @@ public class LoginDialogTest {
   }
 
 //  @Test
-  @Disabled
+//  @Disabled
   void testLogin001() {
 //    fixture.textBox(LoginDialog.ID_USERNAME)
 //           .setText("admin");
@@ -39,8 +37,8 @@ public class LoginDialogTest {
 //           .click();
   }
 
-  @Test
-  @Disabled
+//  @Test
+//  @Disabled
   void testLogin002() {
 //    fixture.textBox(LoginDialog.ID_USERNAME)
 //           .setText("admin");
