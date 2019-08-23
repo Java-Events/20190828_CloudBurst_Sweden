@@ -4,18 +4,12 @@ import org.assertj.swing.core.matcher.DialogMatcher;
 import org.assertj.swing.core.matcher.JButtonMatcher;
 import org.assertj.swing.edt.GuiActionRunner;
 import org.assertj.swing.fixture.DialogFixture;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledOnOs;
-import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.api.*;
 import org.rapidpm.event.desktop.to.web.swing.login.LoginDialog;
 
 import javax.swing.*;
 
 //@ExtendWith(ServerExtension.class)
-@DisabledOnOs(OS.LINUX)
 public class LoginDialogTest {
 
   private DialogFixture fixture;
@@ -38,6 +32,7 @@ public class LoginDialogTest {
   }
 
   @Test
+  @Disabled
   void testLogin001() {
     fixture.textBox(LoginDialog.ID_USERNAME)
            .setText("admin");
@@ -52,6 +47,7 @@ public class LoginDialogTest {
   }
 
   @Test
+  @Disabled
   void testLogin002() {
     fixture.textBox(LoginDialog.ID_USERNAME)
            .setText("admin");
