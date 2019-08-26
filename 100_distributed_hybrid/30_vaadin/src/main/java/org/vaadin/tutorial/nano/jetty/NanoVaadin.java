@@ -19,7 +19,9 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.rapidpm.event.desktop.to.web.api.Constants;
 
+import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 
 
@@ -35,14 +37,19 @@ public class NanoVaadin {
   public static final String CLI_HOST = "host";
   public static final String CLI_PORT = "port";
 
+
   public static void main(String[] args) throws ParseException {
 
+    setProperty(Constants.HOST, "127.0.0.1");
+    setProperty(Constants.PORT, "7000");
 
     //init i18n
     final Options options = new Options();
     options.addOption(CLI_HOST, true, "host to use");
     options.addOption(CLI_PORT, true, "port to use");
     options.addOption(APM, false, "activate APM on");
+    options.addOption(Constants.HOST, true, "ip of the backend service");
+    options.addOption(Constants.PORT, true, "port of the backend service");
 
     DefaultParser parser = new DefaultParser();
     CommandLine   cmd    = parser.parse(options, args);
@@ -56,6 +63,17 @@ public class NanoVaadin {
     if (cmd.hasOption(APM)) {
       //Stagemonitor.init();
     }
+
+    if (cmd.hasOption(Constants.HOST)) {
+      setProperty(Constants.HOST, cmd.getOptionValue(Constants.HOST));
+    }
+    if (cmd.hasOption(Constants.PORT)) {
+      setProperty(Constants.PORT, cmd.getOptionValue(Constants.PORT));
+    }
+
+    System.out.println(Constants.HOST + " = " + getProperty(CLI_HOST));
+    System.out.println(Constants.PORT + " = " + getProperty(CLI_PORT));
+
     new CoreUIService().startupAndBlock();
   }
 }

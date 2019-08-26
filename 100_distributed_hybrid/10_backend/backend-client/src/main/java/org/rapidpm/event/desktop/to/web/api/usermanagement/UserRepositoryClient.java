@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.dongliu.gson.GsonJava8TypeAdapterFactory;
 import okhttp3.OkHttpClient;
+import org.rapidpm.event.desktop.to.web.api.Constants;
 
 import java.util.List;
 
@@ -11,8 +12,8 @@ import static java.lang.System.getProperty;
 
 public class UserRepositoryClient implements UserRepository {
 
-  private final String backendserviceIP   = getProperty("backendserviceIP", "127.0.0.1");
-  private final String backendservicePORT = getProperty("backendservicePORT", "7000");
+  private final String backendserviceIP   = getProperty(Constants.HOST, "127.0.0.1");
+  private final String backendservicePORT = getProperty(Constants.PORT, "7000");
 
   private final Gson         gson   = new GsonBuilder().registerTypeAdapterFactory(new GsonJava8TypeAdapterFactory())
                                                        .create();

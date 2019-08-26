@@ -7,6 +7,7 @@ import net.dongliu.gson.GsonJava8TypeAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.rapidpm.event.desktop.to.web.api.Constants;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class LoginServiceClient
 
   public static final String PATH_LOGIN = "/login";
 
-  private final String backendserviceIP   = getProperty("backendserviceIP", "127.0.0.1");
-  private final String backendservicePORT = getProperty("backendservicePORT", "7000");
+  private final String backendserviceIP   = getProperty(Constants.HOST, "127.0.0.1");
+  private final String backendservicePORT = getProperty(Constants.PORT, "7000");
 
   private final Gson         gson   = new GsonBuilder().registerTypeAdapterFactory(new GsonJava8TypeAdapterFactory())
                                                        .create();

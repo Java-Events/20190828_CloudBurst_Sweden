@@ -9,6 +9,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
+@ExtendWith(BackendExtension.class)
 @ExtendWith(ServletContainerExtension.class)
 @ExtendWith(WebdriverExtension.class)
 @ExtendWith(WebDriverParameterResolver.class)

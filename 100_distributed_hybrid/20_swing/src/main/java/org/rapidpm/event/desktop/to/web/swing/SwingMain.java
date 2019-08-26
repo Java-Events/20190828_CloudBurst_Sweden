@@ -1,6 +1,11 @@
 package org.rapidpm.event.desktop.to.web.swing;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.rapidpm.dependencies.core.logger.HasLogger;
+import org.rapidpm.event.desktop.to.web.api.Constants;
 import org.rapidpm.event.desktop.to.web.swing.login.LoginDialog;
 
 import javax.swing.*;
@@ -8,11 +13,16 @@ import java.awt.*;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static java.lang.System.getProperty;
+import static java.lang.System.setProperty;
 import static java.util.Arrays.stream;
 import static javax.swing.SwingUtilities.invokeLater;
 
 public class SwingMain
     implements HasLogger {
+
+  public static final String CLI_HOST = Constants.PORT;
+  public static final String CLI_PORT = Constants.PORT;
 
   private static final Map<EventType, EventBus<?>> EVENT_BUS_MAP = new ConcurrentHashMap<>();
   //Typical Swing static pattern - remove for web !!
@@ -35,7 +45,12 @@ public class SwingMain
     return frame;
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws ParseException {
+
+    configBackendCoordinates(args);
+    System.out.println(Constants.HOST +  " = " + getProperty(CLI_HOST));
+    System.out.println(Constants.PORT + " = " + getProperty(CLI_PORT));
+
     initEventBusMap();
 
     invokeLater(() -> {
@@ -43,6 +58,24 @@ public class SwingMain
       swingMain.startLoginProcess();
       swingMain.initUI();
     });
+  }
+
+  private static void configBackendCoordinates(String[] args) throws ParseException {
+    setProperty(CLI_HOST, "127.0.0.1");
+    setProperty(CLI_PORT, "7000");
+
+    final Options options = new Options();
+    options.addOption(CLI_HOST, true, "host to use");
+    options.addOption(CLI_PORT, true, "port to use");
+
+    DefaultParser parser = new DefaultParser();
+    CommandLine   cmd    = parser.parse(options, args);
+    if (cmd.hasOption(CLI_HOST)) {
+      setProperty(CLI_HOST, cmd.getOptionValue(CLI_HOST));
+    }
+    if (cmd.hasOption(CLI_PORT)) {
+      setProperty(CLI_PORT, cmd.getOptionValue(CLI_PORT));
+    }
   }
 
   private void initUI() {
