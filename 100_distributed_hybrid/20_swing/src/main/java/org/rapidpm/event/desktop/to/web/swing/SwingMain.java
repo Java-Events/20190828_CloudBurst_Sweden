@@ -21,7 +21,7 @@ import static javax.swing.SwingUtilities.invokeLater;
 public class SwingMain
     implements HasLogger {
 
-  public static final String CLI_HOST = Constants.PORT;
+  public static final String CLI_HOST = Constants.HOST;
   public static final String CLI_PORT = Constants.PORT;
 
   private static final Map<EventType, EventBus<?>> EVENT_BUS_MAP = new ConcurrentHashMap<>();
@@ -48,8 +48,8 @@ public class SwingMain
   public static void main(String[] args) throws ParseException {
 
     configBackendCoordinates(args);
-    System.out.println(Constants.HOST +  " = " + getProperty(CLI_HOST));
-    System.out.println(Constants.PORT + " = " + getProperty(CLI_PORT));
+    System.out.println(Constants.HOST +  " = " + getProperty(Constants.HOST));
+    System.out.println(Constants.PORT + " = " + getProperty(Constants.PORT));
 
     initEventBusMap();
 
